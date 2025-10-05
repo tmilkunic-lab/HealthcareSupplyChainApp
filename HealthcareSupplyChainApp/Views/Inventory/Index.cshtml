@@ -1,0 +1,43 @@
+﻿@model IEnumerable<HealthcareSupplyChainApp.Models.InventoryRowVm>
+@{
+    ViewData["Title"] = "Inventory";
+}
+
+<h1 class="mb-3">Inventory</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th class="text-end">Current</th>
+            <th class="text-end">ADU</th>
+            <th class="text-end">Lead Time (d)</th>
+            <th class="text-end">Safety</th>
+            <th class="text-end">Reorder Pt</th>
+            <th class="text-center">Needs Restock?</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.ItemName</td>
+                <td class="text-end">@r.CurrentStock</td>
+                <td class="text-end">@r.DailyUsage</td>
+                <td class="text-end">@r.LeadTimeDays</td>
+                <td class="text-end">@r.SafetyStock</td>
+                <td class="text-end fw-bold">@r.ReorderPoint</td>
+                <td class="text-center">
+                    @if (r.NeedsRestock)
+                    {
+                        <span class="badge bg-danger">Yes</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">No</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
